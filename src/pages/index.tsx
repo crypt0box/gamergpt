@@ -14,7 +14,8 @@ export default function Home() {
 
     if (match) {
       const gameId = match[1];
-      const test = await axios.post("/api/hello", { gameId });
+      const res = await axios.post("/api/hello", { gameId });
+      console.log("🚀 ~ file: index.tsx:18 ~ onSubmit ~ res:", res.data);
     }
   };
 
