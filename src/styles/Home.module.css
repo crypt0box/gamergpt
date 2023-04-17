@@ -1,0 +1,10 @@
+.main {
+  background-image: linear-gradient(
+    150deg,
+    rgb(42, 71, 94) 20%,
+    rgb(27, 40, 56) 80%
+  );
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}

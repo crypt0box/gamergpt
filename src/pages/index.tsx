@@ -1,10 +1,22 @@
-import { FormControl, FormLabel, Input } from "@chakra-ui/react";
+import styles from "@/styles/Home.module.css";
+import {
+  Avatar,
+  Box,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  ListItem,
+  UnorderedList,
+} from "@chakra-ui/react";
 import axios from "axios";
 import Head from "next/head";
 import { useState } from "react";
+import { Review } from "./api/gpt";
 
 export default function Home() {
   const [url, setUrl] = useState("");
+  const [review, setReview] = useState<Review>();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -12,10 +24,16 @@ export default function Home() {
     const pattern: RegExp = /\/app\/(\d+)\//;
     const match: RegExpMatchArray | null = url.match(pattern);
 
-    if (match) {
+    if (!match) return;
+
+    try {
       const gameId = match[1];
-      const res = await axios.post("/api/hello", { gameId });
-      console.log("🚀 ~ file: index.tsx:18 ~ onSubmit ~ res:", res.data);
+      const { data } = await axios.post<{ answer: Review }>("/api/gpt", {
+        gameId,
+      });
+      setReview(data.answer);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -27,18 +45,120 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <form onSubmit={onSubmit}>
-          <FormControl>
-            <FormLabel hidden>Steam Address</FormLabel>
-            <Input
-              type="text"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              name="url"
-            />
-          </FormControl>
-        </form>
+      <main className={styles.main}>
+        <Box
+          w={400}
+          m={6}
+          background="rgba( 255, 255, 255, 0.1 )"
+          boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
+          borderRadius="10px"
+          border="1px solid rgba( 255, 255, 255, 0.18 )"
+        >
+          <form onSubmit={onSubmit}>
+            <FormControl>
+              <FormLabel hidden>Steam Address</FormLabel>
+              <Input
+                type="text"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                name="url"
+              />
+            </FormControl>
+          </form>
+          <Box
+            display="flex"
+            flexDirection="column"
+            m={4}
+            p={4}
+            background="rgba( 255, 255, 255, 0.1 )"
+            boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
+            borderRadius="10px"
+            border="1px solid rgba( 255, 255, 255, 0.18 )"
+          >
+            <Flex m={2} justifyContent="center" alignItems="center">
+              <Avatar />
+            </Flex>
+            <Box>
+              <UnorderedList>
+                <ListItem>
+                  PS5のDualsenseのアダプティブトリガー機能が楽しい
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>Facilisis in pretium nisl aliquet</ListItem>
+              </UnorderedList>
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            m={4}
+            p={4}
+            background="rgba( 255, 255, 255, 0.1 )"
+            boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
+            borderRadius="10px"
+            border="1px solid rgba( 255, 255, 255, 0.18 )"
+          >
+            <Flex m={2} justifyContent="center" alignItems="center">
+              <Avatar />
+            </Flex>
+            <Box>
+              <UnorderedList>
+                <ListItem>
+                  PS5のDualsenseのアダプティブトリガー機能が楽しい
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>Facilisis in pretium nisl aliquet</ListItem>
+              </UnorderedList>
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            m={4}
+            p={4}
+            background="rgba( 255, 255, 255, 0.1 )"
+            boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
+            borderRadius="10px"
+            border="1px solid rgba( 255, 255, 255, 0.18 )"
+          >
+            <Flex m={2} justifyContent="center" alignItems="center">
+              <Avatar />
+            </Flex>
+            <Box>
+              <UnorderedList>
+                <ListItem>
+                  PS5のDualsenseのアダプティブトリガー機能が楽しい
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>
+                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
+                </ListItem>
+                <ListItem>Facilisis in pretium nisl aliquet</ListItem>
+              </UnorderedList>
+            </Box>
+          </Box>
+        </Box>
       </main>
     </>
   );
