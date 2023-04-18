@@ -6,6 +6,8 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   ListItem,
   UnorderedList,
 } from "@chakra-ui/react";
@@ -14,6 +16,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { Review } from "./api/gpt";
+import { SearchIcon } from "@chakra-ui/icons";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -60,17 +63,26 @@ export default function Home() {
           <form onSubmit={onSubmit}>
             <FormControl display="flex">
               <FormLabel hidden>Steam Address</FormLabel>
-              <Input
-                m={4}
-                backgroundColor="rgba( 255, 255, 255, 0.3 )"
-                border="none"
-                type="text"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                name="url"
-                placeholder="SteamのURLを入力してください..."
-                _placeholder={{ color: "gray.700" }}
-              />
+              <InputGroup position="relative">
+                <InputRightElement
+                  position="absolute"
+                  top={4}
+                  right={4}
+                  pointerEvents="none"
+                  children={<SearchIcon color="gray.500" />}
+                />
+                <Input
+                  m={4}
+                  backgroundColor="rgba( 255, 255, 255, 0.3 )"
+                  border="none"
+                  type="text"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  name="url"
+                  placeholder="SteamのURLを入力してください..."
+                  _placeholder={{ color: "gray.700" }}
+                />
+              </InputGroup>
             </FormControl>
           </form>
           {review && gameId && (
