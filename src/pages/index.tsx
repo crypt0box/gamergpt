@@ -1,6 +1,6 @@
 import styles from "@/styles/Home.module.css";
 import {
-  Avatar,
+  Text,
   Box,
   Flex,
   FormControl,
@@ -21,6 +21,10 @@ import { SearchIcon } from "@chakra-ui/icons";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [review, setReview] = useState<Review>();
+  // const [review, setReview] = useState<Review>({
+  //   negatives: ["aaaa"],
+  //   positives: ["aaaa"],
+  // });
   const [gameId, setGameId] = useState<string>("");
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,7 +56,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <Text
+          position="fixed"
+          top="40%"
+          bgGradient="linear(to-l, #7928CA, #FF0080)"
+          bgClip="text"
+          fontSize="160px"
+          fontWeight="extrabold"
+          opacity={0.4}
+          overflow="hidden"
+          whiteSpace="nowrap"
+          transform="rotate(60deg)"
+          pointerEvents="none"
+        >
+          Gamer GPT
+        </Text>
         <Box
+          zIndex={1}
+          display="flex"
+          flexDirection="column"
           w={400}
           m={6}
           background="rgba( 255, 255, 255, 0.1 )"
@@ -85,6 +107,16 @@ export default function Home() {
               </InputGroup>
             </FormControl>
           </form>
+          {!review && (
+            <Flex justifyContent="center" w="100%" h="60%">
+              <Image
+                src={`https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg`}
+                alt={`goodアイコン`}
+                width={80}
+                height={80}
+              />
+            </Flex>
+          )}
           {review && gameId && (
             <Image
               src={`https://cdn.akamai.steamstatic.com/steam/apps/${gameId}/header.jpg`}
@@ -152,7 +184,7 @@ export default function Home() {
                 position="relative"
                 display="flex"
                 flexDirection="column"
-                m={4}
+                mx={4}
                 p={4}
                 background="rgba( 235, 167, 134, 0.7 )"
                 boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
