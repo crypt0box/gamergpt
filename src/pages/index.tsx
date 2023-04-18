@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import Head from "next/head";
+import Image from "next/image";
 import { useState } from "react";
 import { Review } from "./api/gpt";
 
@@ -65,19 +66,33 @@ export default function Home() {
               />
             </FormControl>
           </form>
+          <Flex
+            m={4}
+            p={3}
+            w={16}
+            justifyContent="center"
+            alignItems="center"
+            backgroundColor="rgba( 135, 206, 235, 0.6 )"
+            borderRadius="10px"
+            border="1px solid rgba( 255, 255, 255, 0.1 )"
+          >
+            <Image
+              src={`https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg`}
+              alt={`goodアイコン`}
+              width={32}
+              height={32}
+            />
+          </Flex>
           <Box
             display="flex"
             flexDirection="column"
-            m={4}
+            mx={4}
             p={4}
-            background="rgba( 255, 255, 255, 0.1 )"
+            background="rgba( 135, 206, 235, 0.6 )"
             boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
             borderRadius="10px"
-            border="1px solid rgba( 255, 255, 255, 0.18 )"
+            border="1px solid rgba( 255, 255, 255, 0.1 )"
           >
-            <Flex m={2} justifyContent="center" alignItems="center">
-              <Avatar />
-            </Flex>
             <Box>
               <UnorderedList>
                 <ListItem>
@@ -96,50 +111,34 @@ export default function Home() {
               </UnorderedList>
             </Box>
           </Box>
+          <Flex
+            m={4}
+            p={3}
+            w={16}
+            justifyContent="center"
+            alignItems="center"
+            backgroundColor="rgba( 235, 167, 134, 0.7 )"
+            borderRadius="10px"
+            border="1px solid rgba( 255, 255, 255, 0.1 )"
+          >
+            <Image
+              src={`https://twemoji.maxcdn.com/v/latest/svg/1f44e.svg`}
+              alt={`goodアイコン`}
+              width={32}
+              height={32}
+            />
+          </Flex>
           <Box
+            position="relative"
             display="flex"
             flexDirection="column"
             m={4}
             p={4}
-            background="rgba( 255, 255, 255, 0.1 )"
+            background="rgba( 235, 167, 134, 0.7 )"
             boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
             borderRadius="10px"
             border="1px solid rgba( 255, 255, 255, 0.18 )"
           >
-            <Flex m={2} justifyContent="center" alignItems="center">
-              <Avatar />
-            </Flex>
-            <Box>
-              <UnorderedList>
-                <ListItem>
-                  PS5のDualsenseのアダプティブトリガー機能が楽しい
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-              </UnorderedList>
-            </Box>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            m={4}
-            p={4}
-            background="rgba( 255, 255, 255, 0.1 )"
-            boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
-            borderRadius="10px"
-            border="1px solid rgba( 255, 255, 255, 0.18 )"
-          >
-            <Flex m={2} justifyContent="center" alignItems="center">
-              <Avatar />
-            </Flex>
             <Box>
               <UnorderedList>
                 <ListItem>
