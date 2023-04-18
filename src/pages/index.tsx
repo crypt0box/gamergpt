@@ -23,7 +23,7 @@ export default function Home() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const pattern: RegExp = /\/app\/(\d+)\//;
+    const pattern: RegExp = /(\d{6})/;
     const match: RegExpMatchArray | null = url.match(pattern);
 
     if (!match) return;
@@ -58,13 +58,18 @@ export default function Home() {
           border="1px solid rgba( 255, 255, 255, 0.18 )"
         >
           <form onSubmit={onSubmit}>
-            <FormControl>
+            <FormControl display="flex">
               <FormLabel hidden>Steam Address</FormLabel>
               <Input
+                m={4}
+                backgroundColor="rgba( 255, 255, 255, 0.3 )"
+                border="none"
                 type="text"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 name="url"
+                placeholder="SteamのURLを入力してください..."
+                _placeholder={{ color: "gray.700" }}
               />
             </FormControl>
           </form>
