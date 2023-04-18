@@ -18,6 +18,7 @@ import { Review } from "./api/gpt";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [review, setReview] = useState<Review>();
+  const [gameId, setGameId] = useState<string>("");
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +34,7 @@ export default function Home() {
         gameId,
       });
       setReview(data.answer);
+      setGameId(gameId);
     } catch (error) {
       console.error(error);
     }
@@ -66,97 +68,90 @@ export default function Home() {
               />
             </FormControl>
           </form>
-          <Flex
-            m={4}
-            p={3}
-            w={16}
-            justifyContent="center"
-            alignItems="center"
-            backgroundColor="rgba( 135, 206, 235, 0.6 )"
-            borderRadius="10px"
-            border="1px solid rgba( 255, 255, 255, 0.1 )"
-          >
+          {review && gameId && (
             <Image
-              src={`https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg`}
-              alt={`goodアイコン`}
-              width={32}
-              height={32}
+              src={`https://cdn.akamai.steamstatic.com/steam/apps/${gameId}/header.jpg`}
+              alt={`ゲームアイキャッチ`}
+              width={365}
+              height={200}
+              style={{ margin: "16px", borderRadius: "4px" }}
             />
-          </Flex>
-          <Box
-            display="flex"
-            flexDirection="column"
-            mx={4}
-            p={4}
-            background="rgba( 135, 206, 235, 0.6 )"
-            boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
-            borderRadius="10px"
-            border="1px solid rgba( 255, 255, 255, 0.1 )"
-          >
-            <Box>
-              <UnorderedList>
-                <ListItem>
-                  PS5のDualsenseのアダプティブトリガー機能が楽しい
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-              </UnorderedList>
-            </Box>
-          </Box>
-          <Flex
-            m={4}
-            p={3}
-            w={16}
-            justifyContent="center"
-            alignItems="center"
-            backgroundColor="rgba( 235, 167, 134, 0.7 )"
-            borderRadius="10px"
-            border="1px solid rgba( 255, 255, 255, 0.1 )"
-          >
-            <Image
-              src={`https://twemoji.maxcdn.com/v/latest/svg/1f44e.svg`}
-              alt={`goodアイコン`}
-              width={32}
-              height={32}
-            />
-          </Flex>
-          <Box
-            position="relative"
-            display="flex"
-            flexDirection="column"
-            m={4}
-            p={4}
-            background="rgba( 235, 167, 134, 0.7 )"
-            boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
-            borderRadius="10px"
-            border="1px solid rgba( 255, 255, 255, 0.18 )"
-          >
-            <Box>
-              <UnorderedList>
-                <ListItem>
-                  PS5のDualsenseのアダプティブトリガー機能が楽しい
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>
-                  CDProjektはファンに対して楽しい思い出のままで終わらせるべきだった
-                </ListItem>
-                <ListItem>Facilisis in pretium nisl aliquet</ListItem>
-              </UnorderedList>
-            </Box>
-          </Box>
+          )}
+          {review && (
+            <>
+              <Flex
+                m={4}
+                p={3}
+                w={16}
+                justifyContent="center"
+                alignItems="center"
+                backgroundColor="rgba( 135, 206, 235, 0.6 )"
+                borderRadius="10px"
+                border="1px solid rgba( 255, 255, 255, 0.1 )"
+              >
+                <Image
+                  src={`https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg`}
+                  alt={`goodアイコン`}
+                  width={32}
+                  height={32}
+                />
+              </Flex>
+              <Box
+                display="flex"
+                flexDirection="column"
+                mx={4}
+                p={4}
+                background="rgba( 135, 206, 235, 0.6 )"
+                boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
+                borderRadius="10px"
+                border="1px solid rgba( 255, 255, 255, 0.1 )"
+              >
+                <Box>
+                  <UnorderedList>
+                    {review.positives.map((p) => (
+                      <ListItem>{p}</ListItem>
+                    ))}
+                  </UnorderedList>
+                </Box>
+              </Box>
+              <Flex
+                m={4}
+                p={3}
+                w={16}
+                justifyContent="center"
+                alignItems="center"
+                backgroundColor="rgba( 235, 167, 134, 0.7 )"
+                borderRadius="10px"
+                border="1px solid rgba( 255, 255, 255, 0.1 )"
+              >
+                <Image
+                  src={`https://twemoji.maxcdn.com/v/latest/svg/1f44e.svg`}
+                  alt={`goodアイコン`}
+                  width={32}
+                  height={32}
+                />
+              </Flex>
+              <Box
+                position="relative"
+                display="flex"
+                flexDirection="column"
+                m={4}
+                p={4}
+                background="rgba( 235, 167, 134, 0.7 )"
+                boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
+                borderRadius="10px"
+                border="1px solid rgba( 255, 255, 255, 0.18 )"
+              >
+                <Box>
+                  <UnorderedList>
+                    {review.negatives.map((n, index) => (
+                      <ListItem key={index}>{n}</ListItem>
+                    ))}
+                  </UnorderedList>
+                </Box>
+              </Box>
+            </>
+          )}
         </Box>
       </main>
     </>
