@@ -103,8 +103,9 @@ export default function Home() {
                   top={0}
                   right={0}
                   pointerEvents="none"
-                  children={<SearchIcon color="gray.600" />}
-                />
+                >
+                  <SearchIcon color="gray.600" />
+                </InputRightElement>
                 <Input
                   backgroundColor="rgba( 255, 255, 255, 0.3 )"
                   border="none"
@@ -146,6 +147,7 @@ export default function Home() {
                   <Flex gap={1}>
                     {["L", "o", "a", "d", "i", "n", "g"].map((str, index) => (
                       <motion.div
+                        key={index}
                         animate={{ y: [0, -16, 0] }}
                         transition={{
                           duration: 1,
@@ -218,8 +220,8 @@ export default function Home() {
                 >
                   <Box>
                     <UnorderedList>
-                      {review.positives.map((p) => (
-                        <ListItem>{p}</ListItem>
+                      {review.positives.map((p, index) => (
+                        <ListItem key={index}>{p}</ListItem>
                       ))}
                     </UnorderedList>
                   </Box>
