@@ -17,6 +17,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Review } from "./api/gpt";
 import { SearchIcon } from "@chakra-ui/icons";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -108,14 +109,113 @@ export default function Home() {
             </FormControl>
           </form>
           {!review && (
-            <Flex justifyContent="center" w="100%" h="60%">
-              <Image
-                src={`https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg`}
-                alt={`goodアイコン`}
-                width={80}
-                height={80}
-              />
-            </Flex>
+            <>
+              <Flex
+                flexDirection="column"
+                alignItems="center"
+                w="100%"
+                mt="50%"
+              >
+                <Image
+                  src={`https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg`}
+                  alt={`goodアイコン`}
+                  width={80}
+                  height={80}
+                />
+                <Flex gap={1}>
+                  <motion.div
+                    animate={{ y: [0, -16, 0] }}
+                    transition={{
+                      duration: 1,
+                      times: [0, 0.6, 1],
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                    }}
+                    style={{ fontSize: "24px" }}
+                  >
+                    L
+                  </motion.div>
+                  <motion.div
+                    animate={{ y: [0, -16, 0] }}
+                    transition={{
+                      duration: 1,
+                      times: [0, 0.6, 1],
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      delay: 0.1,
+                    }}
+                    style={{ fontSize: "24px" }}
+                  >
+                    o
+                  </motion.div>
+                  <motion.div
+                    animate={{ y: [0, -16, 0] }}
+                    transition={{
+                      duration: 1,
+                      times: [0, 0.6, 1],
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      delay: 0.2,
+                    }}
+                    style={{ fontSize: "24px" }}
+                  >
+                    a
+                  </motion.div>
+                  <motion.div
+                    animate={{ y: [0, -16, 0] }}
+                    transition={{
+                      duration: 1,
+                      times: [0, 0.6, 1],
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      delay: 0.3,
+                    }}
+                    style={{ fontSize: "24px" }}
+                  >
+                    d
+                  </motion.div>
+                  <motion.div
+                    animate={{ y: [0, -16, 0] }}
+                    transition={{
+                      duration: 1,
+                      times: [0, 0.6, 1],
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      delay: 0.4,
+                    }}
+                    style={{ fontSize: "24px" }}
+                  >
+                    i
+                  </motion.div>
+                  <motion.div
+                    animate={{ y: [0, -16, 0] }}
+                    transition={{
+                      duration: 1,
+                      times: [0, 0.6, 1],
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      delay: 0.5,
+                    }}
+                    style={{ fontSize: "24px" }}
+                  >
+                    n
+                  </motion.div>
+                  <motion.div
+                    animate={{ y: [0, -16, 0] }}
+                    transition={{
+                      duration: 1,
+                      times: [0, 0.6, 1],
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      delay: 0.6,
+                    }}
+                    style={{ fontSize: "24px" }}
+                  >
+                    g
+                  </motion.div>
+                </Flex>
+              </Flex>
+            </>
           )}
           {review && gameId && (
             <Image
