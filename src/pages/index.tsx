@@ -14,10 +14,10 @@ import {
 import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Review } from "./api/gpt";
 import { SearchIcon } from "@chakra-ui/icons";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -27,16 +27,28 @@ export default function Home() {
   //   positives: ["aaaa"],
   // });
   const [gameId, setGameId] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const controls = useAnimationControls();
+
+  const start = () => {
+    controls.start({ y: [0, -16, 0] });
+  };
+
+  const stop = () => {
+    controls.stop();
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const pattern: RegExp = /(\d{6})/;
+    const pattern: RegExp = /(\d{6,})/;
     const match: RegExpMatchArray | null = url.match(pattern);
 
     if (!match) return;
 
     try {
+      setReview(undefined);
+      setIsLoading(true);
       const gameId = match[1];
       const { data } = await axios.post<{ answer: Review }>("/api/gpt", {
         gameId,
@@ -45,8 +57,14 @@ export default function Home() {
       setGameId(gameId);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (isLoading) start();
+  }, [isLoading, start]);
 
   return (
     <>
@@ -78,6 +96,7 @@ export default function Home() {
           flexDirection="column"
           w={400}
           m={6}
+          p={4}
           background="rgba( 255, 255, 255, 0.1 )"
           boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
           borderRadius="10px"
@@ -89,13 +108,12 @@ export default function Home() {
               <InputGroup position="relative">
                 <InputRightElement
                   position="absolute"
-                  top={4}
-                  right={4}
+                  top={0}
+                  right={0}
                   pointerEvents="none"
-                  children={<SearchIcon color="gray.500" />}
+                  children={<SearchIcon color="gray.600" />}
                 />
                 <Input
-                  m={4}
                   backgroundColor="rgba( 255, 255, 255, 0.3 )"
                   border="none"
                   type="text"
@@ -104,6 +122,7 @@ export default function Home() {
                   name="url"
                   placeholder="SteamのURLを入力してください..."
                   _placeholder={{ color: "gray.700" }}
+                  disabled={isLoading}
                 />
               </InputGroup>
             </FormControl>
@@ -116,104 +135,39 @@ export default function Home() {
                 w="100%"
                 mt="50%"
               >
-                <Image
-                  src={`https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg`}
-                  alt={`goodアイコン`}
-                  width={80}
-                  height={80}
-                />
-                <Flex gap={1}>
-                  <motion.div
-                    animate={{ y: [0, -16, 0] }}
-                    transition={{
-                      duration: 1,
-                      times: [0, 0.6, 1],
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                    }}
-                    style={{ fontSize: "24px" }}
-                  >
-                    L
-                  </motion.div>
-                  <motion.div
-                    animate={{ y: [0, -16, 0] }}
-                    transition={{
-                      duration: 1,
-                      times: [0, 0.6, 1],
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      delay: 0.1,
-                    }}
-                    style={{ fontSize: "24px" }}
-                  >
-                    o
-                  </motion.div>
-                  <motion.div
-                    animate={{ y: [0, -16, 0] }}
-                    transition={{
-                      duration: 1,
-                      times: [0, 0.6, 1],
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      delay: 0.2,
-                    }}
-                    style={{ fontSize: "24px" }}
-                  >
-                    a
-                  </motion.div>
-                  <motion.div
-                    animate={{ y: [0, -16, 0] }}
-                    transition={{
-                      duration: 1,
-                      times: [0, 0.6, 1],
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      delay: 0.3,
-                    }}
-                    style={{ fontSize: "24px" }}
-                  >
-                    d
-                  </motion.div>
-                  <motion.div
-                    animate={{ y: [0, -16, 0] }}
-                    transition={{
-                      duration: 1,
-                      times: [0, 0.6, 1],
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      delay: 0.4,
-                    }}
-                    style={{ fontSize: "24px" }}
-                  >
-                    i
-                  </motion.div>
-                  <motion.div
-                    animate={{ y: [0, -16, 0] }}
-                    transition={{
-                      duration: 1,
-                      times: [0, 0.6, 1],
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      delay: 0.5,
-                    }}
-                    style={{ fontSize: "24px" }}
-                  >
-                    n
-                  </motion.div>
-                  <motion.div
-                    animate={{ y: [0, -16, 0] }}
-                    transition={{
-                      duration: 1,
-                      times: [0, 0.6, 1],
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      delay: 0.6,
-                    }}
-                    style={{ fontSize: "24px" }}
-                  >
-                    g
-                  </motion.div>
-                </Flex>
+                <motion.div
+                  animate={controls}
+                  transition={{
+                    duration: 1,
+                    times: [0, 0.3, 1],
+                    repeat: Infinity,
+                  }}
+                >
+                  <Image
+                    src={`https://twemoji.maxcdn.com/v/latest/svg/1f3ae.svg`}
+                    alt={`ゲームコントローラーアイコン`}
+                    width={80}
+                    height={80}
+                  />
+                </motion.div>
+                {isLoading && (
+                  <Flex gap={1}>
+                    {["L", "o", "a", "d", "i", "n", "g"].map((str, index) => (
+                      <motion.div
+                        animate={{ y: [0, -16, 0] }}
+                        transition={{
+                          duration: 1,
+                          times: [0, 0.3, 1],
+                          repeat: Infinity,
+                          delay: index * 0.1,
+                        }}
+                        style={{ fontSize: "24px" }}
+                      >
+                        {str}
+                      </motion.div>
+                    ))}
+                  </Flex>
+                )}
               </Flex>
             </>
           )}
@@ -223,13 +177,13 @@ export default function Home() {
               alt={`ゲームアイキャッチ`}
               width={365}
               height={200}
-              style={{ margin: "16px", borderRadius: "4px" }}
+              style={{ marginTop: "16px", borderRadius: "4px" }}
             />
           )}
           {review && (
             <>
               <Flex
-                m={4}
+                mt={4}
                 p={3}
                 w={16}
                 justifyContent="center"
@@ -248,7 +202,7 @@ export default function Home() {
               <Box
                 display="flex"
                 flexDirection="column"
-                mx={4}
+                mt={4}
                 p={4}
                 background="rgba( 135, 206, 235, 0.6 )"
                 boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
@@ -264,7 +218,7 @@ export default function Home() {
                 </Box>
               </Box>
               <Flex
-                m={4}
+                mt={4}
                 p={3}
                 w={16}
                 justifyContent="center"
@@ -284,7 +238,7 @@ export default function Home() {
                 position="relative"
                 display="flex"
                 flexDirection="column"
-                mx={4}
+                mt={4}
                 p={4}
                 background="rgba( 235, 167, 134, 0.7 )"
                 boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"

@@ -83,3 +83,14 @@ export default async function handler(
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
+/**
+p1: 作り込まれた奥深いストーリーに度肝を抜かれる。
+p2: PS5のDualsenseにも対応して楽しめる。
+p3: 安くなっているので値段以上のものを得られる。
+p4: レイトレーシングによるエフェクトが美しい。
+
+n1: バグが多く、不安定な動作がある。
+n2: FS2が効果がわかりづらい。
+n3: ハイエンドカードが必要でパフォーマンスが重い。
+ */
