@@ -22,20 +22,12 @@ import { motion, useAnimationControls } from "framer-motion";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [review, setReview] = useState<Review>();
-  // const [review, setReview] = useState<Review>({
-  //   negatives: ["aaaa"],
-  //   positives: ["aaaa"],
-  // });
   const [gameId, setGameId] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const controls = useAnimationControls();
 
   const start = () => {
     controls.start({ y: [0, -16, 0] });
-  };
-
-  const stop = () => {
-    controls.stop();
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -172,87 +164,111 @@ export default function Home() {
             </>
           )}
           {review && gameId && (
-            <Image
-              src={`https://cdn.akamai.steamstatic.com/steam/apps/${gameId}/header.jpg`}
-              alt={`ゲームアイキャッチ`}
-              width={365}
-              height={200}
-              style={{ marginTop: "16px", borderRadius: "4px" }}
-            />
+            <motion.div
+              animate={{
+                opacity: [0, 1],
+                transform: ["translateY(64px)", "translateY(0px)"],
+              }}
+              transition={{ duration: 0.5 }}
+            >
+              <Image
+                src={`https://cdn.akamai.steamstatic.com/steam/apps/${gameId}/header.jpg`}
+                alt={`ゲームアイキャッチ`}
+                width={365}
+                height={200}
+                style={{ marginTop: "16px", borderRadius: "4px" }}
+              />
+            </motion.div>
           )}
           {review && (
             <>
-              <Flex
-                mt={4}
-                p={3}
-                w={16}
-                justifyContent="center"
-                alignItems="center"
-                backgroundColor="rgba( 135, 206, 235, 0.6 )"
-                borderRadius="10px"
-                border="1px solid rgba( 255, 255, 255, 0.1 )"
+              <motion.div
+                animate={{
+                  opacity: [0, 1],
+                  transform: ["translateY(64px)", "translateY(0px)"],
+                }}
+                transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <Image
-                  src={`https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg`}
-                  alt={`goodアイコン`}
-                  width={32}
-                  height={32}
-                />
-              </Flex>
-              <Box
-                display="flex"
-                flexDirection="column"
-                mt={4}
-                p={4}
-                background="rgba( 135, 206, 235, 0.6 )"
-                boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
-                borderRadius="10px"
-                border="1px solid rgba( 255, 255, 255, 0.1 )"
-              >
-                <Box>
-                  <UnorderedList>
-                    {review.positives.map((p) => (
-                      <ListItem>{p}</ListItem>
-                    ))}
-                  </UnorderedList>
+                <Flex
+                  mt={4}
+                  p={3}
+                  w={16}
+                  justifyContent="center"
+                  alignItems="center"
+                  backgroundColor="rgba( 135, 206, 235, 0.6 )"
+                  borderRadius="10px"
+                  border="1px solid rgba( 255, 255, 255, 0.1 )"
+                >
+                  <Image
+                    src={`https://twemoji.maxcdn.com/v/latest/svg/1f44d.svg`}
+                    alt={`goodアイコン`}
+                    width={32}
+                    height={32}
+                  />
+                </Flex>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  mt={4}
+                  p={4}
+                  background="rgba( 135, 206, 235, 0.6 )"
+                  boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
+                  borderRadius="10px"
+                  border="1px solid rgba( 255, 255, 255, 0.1 )"
+                >
+                  <Box>
+                    <UnorderedList>
+                      {review.positives.map((p) => (
+                        <ListItem>{p}</ListItem>
+                      ))}
+                    </UnorderedList>
+                  </Box>
                 </Box>
-              </Box>
-              <Flex
-                mt={4}
-                p={3}
-                w={16}
-                justifyContent="center"
-                alignItems="center"
-                backgroundColor="rgba( 235, 167, 134, 0.7 )"
-                borderRadius="10px"
-                border="1px solid rgba( 255, 255, 255, 0.1 )"
+              </motion.div>
+              <motion.div
+                animate={{
+                  opacity: [0, 1],
+                  transform: ["translateY(64px)", "translateY(0px)"],
+                }}
+                transition={{ duration: 0.5, delay: 1 }}
               >
-                <Image
-                  src={`https://twemoji.maxcdn.com/v/latest/svg/1f44e.svg`}
-                  alt={`goodアイコン`}
-                  width={32}
-                  height={32}
-                />
-              </Flex>
-              <Box
-                position="relative"
-                display="flex"
-                flexDirection="column"
-                mt={4}
-                p={4}
-                background="rgba( 235, 167, 134, 0.7 )"
-                boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
-                borderRadius="10px"
-                border="1px solid rgba( 255, 255, 255, 0.18 )"
-              >
-                <Box>
-                  <UnorderedList>
-                    {review.negatives.map((n, index) => (
-                      <ListItem key={index}>{n}</ListItem>
-                    ))}
-                  </UnorderedList>
+                <Flex
+                  mt={4}
+                  p={3}
+                  w={16}
+                  justifyContent="center"
+                  alignItems="center"
+                  backgroundColor="rgba( 235, 167, 134, 0.7 )"
+                  borderRadius="10px"
+                  border="1px solid rgba( 255, 255, 255, 0.1 )"
+                >
+                  <Image
+                    src={`https://twemoji.maxcdn.com/v/latest/svg/1f44e.svg`}
+                    alt={`badアイコン`}
+                    width={32}
+                    height={32}
+                  />
+                </Flex>
+                <Box
+                  position="relative"
+                  display="flex"
+                  flexDirection="column"
+                  mt={4}
+                  p={4}
+                  background="rgba( 235, 167, 134, 0.7 )"
+                  boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
+                  borderRadius="10px"
+                  border="1px solid rgba( 255, 255, 255, 0.18 )"
+                >
+                  <Box>
+                    <UnorderedList>
+                      {review.negatives.map((n, index) => (
+                        <ListItem key={index}>{n}</ListItem>
+                      ))}
+                    </UnorderedList>
+                  </Box>
                 </Box>
-              </Box>
+              </motion.div>
             </>
           )}
         </Box>
