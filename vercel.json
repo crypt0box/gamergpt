@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/**/*.[jt]s": {
-      "maxDuration": 60
-    }
-  }
-}
