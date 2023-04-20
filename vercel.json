@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/*.js": {
+    "api/**/*.[jt]s": {
       "maxDuration": 60
     }
   }

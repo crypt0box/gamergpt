@@ -15,7 +15,7 @@ import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Review } from "./api/gpt";
+import { Review } from "@/api/gpt";
 import { SearchIcon } from "@chakra-ui/icons";
 import { motion, useAnimationControls } from "framer-motion";
 
