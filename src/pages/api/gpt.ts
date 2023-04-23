@@ -73,6 +73,7 @@ export default async function handler(
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [messages, { role: "user", content: review }],
+      temperature: 0.2,
     });
     const answer = `${completion.data.choices[0].message?.content.trim()}\r\n`;
 
