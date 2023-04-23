@@ -165,7 +165,7 @@ export default function Home() {
               </Flex>
             </>
           )}
-          {review && gameId && (
+          {/* {review && gameId && (
             <motion.div
               animate={{
                 opacity: [0, 1],
@@ -181,7 +181,7 @@ export default function Home() {
                 style={{ marginTop: "16px", borderRadius: "4px" }}
               />
             </motion.div>
-          )}
+          )} */}
           {review && (
             <>
               <motion.div
