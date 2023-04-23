@@ -185,6 +185,7 @@ export default function Home() {
           {review && (
             <>
               <motion.div
+                initial={{ opacity: 0 }}
                 animate={{
                   opacity: [0, 1],
                   transform: ["translateY(64px)", "translateY(0px)"],
@@ -228,6 +229,7 @@ export default function Home() {
                 </Box>
               </motion.div>
               <motion.div
+                initial={{ opacity: 0 }}
                 animate={{
                   opacity: [0, 1],
                   transform: ["translateY(64px)", "translateY(0px)"],
