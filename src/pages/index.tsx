@@ -25,7 +25,7 @@ export default function Home() {
   const [review, setReview] = useState<Review>();
   const [gameId, setGameId] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
   const controls = useAnimationControls();
 
   const start = () => {
@@ -95,7 +95,7 @@ export default function Home() {
           display="flex"
           flexDirection="column"
           w={400}
-          m={6}
+          m="24px 24px 0 24px"
           p={4}
           background="rgba( 255, 255, 255, 0.1 )"
           boxShadow="0 8px 32px 0 rgba( 31, 38, 135, 0.1 )"
@@ -293,6 +293,16 @@ export default function Home() {
           )}
         </Box>
       </main>
+      <Flex justify="center" gap={1} backgroundColor="rgb(27, 40, 56)">
+        <Text color="white">Copyright 2023</Text>
+        <Link
+          color="blue.500"
+          href="https://twitter.com/cryptooooon"
+          isExternal
+        >
+          @cryptobox
+        </Link>
+      </Flex>
     </>
   );
 }
