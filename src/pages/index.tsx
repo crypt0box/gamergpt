@@ -10,6 +10,7 @@ import {
   InputRightElement,
   ListItem,
   UnorderedList,
+  Link,
 } from "@chakra-ui/react";
 import axios from "axios";
 import Head from "next/head";
@@ -24,10 +25,16 @@ export default function Home() {
   const [review, setReview] = useState<Review>();
   const [gameId, setGameId] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(true);
   const controls = useAnimationControls();
 
   const start = () => {
     controls.start({ y: [0, -16, 0] });
+  };
+
+  const initialize = () => {
+    setIsError(false);
+    setReview(undefined);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,7 +46,7 @@ export default function Home() {
     if (!match) return;
 
     try {
-      setReview(undefined);
+      initialize();
       setIsLoading(true);
       const gameId = match[1];
       const { data } = await axios.post<{ answer: Review }>("/api/gpt", {
@@ -48,6 +55,7 @@ export default function Home() {
       setReview(data.answer);
       setGameId(gameId);
     } catch (error) {
+      setIsError(true);
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -143,6 +151,7 @@ export default function Home() {
                     height={80}
                   />
                 </motion.div>
+
                 {isLoading && (
                   <Flex gap={1}>
                     {["L", "o", "a", "d", "i", "n", "g"].map((str, index) => (
@@ -164,6 +173,13 @@ export default function Home() {
                 )}
               </Flex>
             </>
+          )}
+          {(isError ||
+            (review?.negatives.length === 0 &&
+              review?.positives.length === 0)) && (
+            <Text>
+              ごめんなさい！モンスターが作業を妨害してエラーになってしまいました。時間を空けてもう一度お試しください。
+            </Text>
           )}
           {/* {review && gameId && (
             <motion.div
